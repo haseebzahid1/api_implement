@@ -1,13 +1,35 @@
 import 'package:api_implement/model/categories_model.dart';
+import 'package:api_implement/page/categories/categories_listView.dart';
+import 'package:api_implement/page/categories/provider.dart';
 import 'package:api_implement/style/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    return ChangeNotifierProvider<MenuItemProvider>(
+      create:(context)=>MenuItemProvider(),
+      child:CategoriesScreenWidget(),
+    );
+  }
+}
+
+class CategoriesScreenWidget extends StatefulWidget {
+  const CategoriesScreenWidget({Key? key}) : super(key: key);
+
+  @override
+  _CategoriesScreenWidgetState createState() => _CategoriesScreenWidgetState();
+}
+
+class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
+  @override
+  Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final menuProvider = Provider.of<MenuItemProvider>(context);
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black.withOpacity(0.9)),
@@ -56,7 +78,8 @@ class CategoriesScreen extends StatelessWidget {
                 Categories categoriesItem= categories[index];
                 return GestureDetector(
                   onTap: (){
-                    // Navigator.of(context).push(MaterialPageRoute(builder: (context)=> CategoriesListView()));
+                    menuProvider.fetchMenuType();
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> CategoriesListView()));
                   },
                   child: Container(
                     decoration: BoxDecoration(
