@@ -27,9 +27,14 @@ class CategoriesScreenWidget extends StatefulWidget {
 
 class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
   @override
+  void initState(){
+    final menuProvider = Provider.of<MenuItemProvider>(context, listen: false);
+    menuProvider.fetchMenuType();
+    super.initState();
+  }
   Widget build(BuildContext context) {
+    print("build");
     final Size size = MediaQuery.of(context).size;
-    final menuProvider = Provider.of<MenuItemProvider>(context);
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black.withOpacity(0.9)),
@@ -56,10 +61,7 @@ class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
           const SizedBox(width: 10,)
         ],
       ),
-      drawer:const Drawer(
-        // backgroundColor: Colors.transparent,
-        // child: MyDrawerList(),
-      ),
+      drawer:const Drawer(),
       body: Column(
         children: [
           SizedBox(height: size.height * 0.02,),
@@ -78,7 +80,6 @@ class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
                 Categories categoriesItem= categories[index];
                 return GestureDetector(
                   onTap: (){
-                    menuProvider.fetchMenuType();
                     Navigator.of(context).push(MaterialPageRoute(builder: (context)=> CategoriesListView()));
                   },
                   child: Container(

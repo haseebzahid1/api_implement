@@ -1,4 +1,4 @@
-import 'package:api_implement/screen/CategoriesScreen.dart';
+import 'package:api_implement/page/categories/CategoriesScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

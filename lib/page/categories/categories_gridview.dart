@@ -25,11 +25,7 @@ class CategoriesGridView extends StatelessWidget {
               itemBuilder: (context, index){
                 Categories categoriesItem= categories[index];
                 return GestureDetector(
-                  // onTap: (){
-                  //   Navigator.of(context).push(MaterialPageRoute(builder: (context)=> CategoriesDetailView(
-                  //     detailViewCategories: categoriesItem,
-                  //   )));
-                  // },
+                  onTap: (){},
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.white,
