@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:api_implement/model/categorie_api.dart';
+import 'package:api_implement/model/category.dart';
 import 'package:http/http.dart' as http;
 
 
