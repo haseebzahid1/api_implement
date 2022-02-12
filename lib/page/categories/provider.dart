@@ -1,14 +1,31 @@
+import 'package:api_implement/model/category.dart';
 import 'package:api_implement/repo/categorieItemRepo.dart';
 import 'package:flutter/material.dart';
 
 class MenuItemProvider extends ChangeNotifier {
+  List<CategoryMenuType>  menuList = [];
+  bool isServiceCalling= false;
+
+
   void fetchMenuType() async {
-    var menuType = await MenuItemRepo.getAllOrderTypes();
+    isServiceCalling = false;
+    var menuType = await CategoriesRepo.getAllOrderTypes();
+    if(menuType != null && menuType.isNotEmpty){
 
-    print("Response is $menuType");
 
-    for (var item in menuType) {
-      print("${item.id} ${item.title}");
+      menuList = menuType;
+      isServiceCalling = true;
+      notifyListeners();
     }
+
+
+
+    // print("Response is $menuType");
+    //
+    // for (CategoryMenuType item in menuType) {
+    //   print("${item.id} \n ${item.title} \n${item.description}\n ${item.image}");
+    // }
   }
+
+
 }

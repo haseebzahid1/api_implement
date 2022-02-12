@@ -33,8 +33,9 @@ class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
     super.initState();
   }
   Widget build(BuildContext context) {
-    print("build");
+    final menuProvider = Provider.of<MenuItemProvider>(context);
     final Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black.withOpacity(0.9)),
@@ -62,14 +63,15 @@ class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
         ],
       ),
       drawer:const Drawer(),
-      body: Column(
+      body: menuProvider.isServiceCalling ? Column(
         children: [
           SizedBox(height: size.height * 0.02,),
           Expanded(
             child: GridView.builder(
               scrollDirection: Axis.vertical,
               padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
-              itemCount: categories.length,
+              itemCount: menuProvider.menuList.length,
+              // itemCount: categories.length,
               gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
                 mainAxisSpacing:20,
                 crossAxisCount: 2,
@@ -77,7 +79,8 @@ class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
                 childAspectRatio: 0.97,
               ),
               itemBuilder: (context, index){
-                Categories categoriesItem= categories[index];
+                var categoriesItem= menuProvider.menuList[index];
+                // Categories categoriesItem= categories[index];
                 return GestureDetector(
                   onTap: (){
                     Navigator.of(context).push(MaterialPageRoute(builder: (context)=> CategoriesListView()));
@@ -106,12 +109,13 @@ class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
                             ),
 
                             width: size.width,
-                            child: Image.asset(categoriesItem.img,fit: BoxFit.cover,),
+                            child: Image.network(categoriesItem.image.toString())
+                            // child: Image.asset(categoriesItem.image!,fit: BoxFit.cover,),
                           ),
                         ),
                         Padding(
                           padding:  const EdgeInsets.all(7.0),
-                          child: Text(categoriesItem.name,style: categoriesTitle,textAlign: TextAlign.center,),
+                          child: Text(categoriesItem.title!,style: categoriesTitle,textAlign: TextAlign.center,),
                         ),
                       ],
                     ),
@@ -121,7 +125,7 @@ class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
             ),
           ),
         ],
-      ),
+      ) : Center(child: CircularProgressIndicator())
     );
   }
 }
