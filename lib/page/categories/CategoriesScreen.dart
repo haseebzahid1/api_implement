@@ -83,7 +83,9 @@ class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
                 // Categories categoriesItem= categories[index];
                 return GestureDetector(
                   onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> CategoriesListView()));
+                    print(categoriesItem.id);
+                    menuProvider.fetchCategory(categoriesItem.id);
+                    // Navigator.of(context).push(MaterialPageRoute(builder: (context)=> CategoriesListView()));
                   },
                   child: Container(
                     decoration: BoxDecoration(
