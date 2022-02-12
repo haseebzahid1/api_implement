@@ -1,21 +1,47 @@
+import 'package:api_implement/model/CategorieItem.dart';
 import 'package:api_implement/model/categories_apo.dart';
 import 'package:api_implement/page/categories/categories_gridview.dart';
+import 'package:api_implement/page/categories/listProvider.dart';
 import 'package:api_implement/style/constant.dart';
 import 'package:api_implement/style/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+class SubCategoriesScreen extends StatelessWidget {
+  int? id;
+   SubCategoriesScreen({Key? key,this.id}) : super(key: key);
 
-class CategoriesListView extends StatefulWidget {
-CategoriesListView({Key? key,  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
 
-@override
-State<CategoriesListView> createState() => _CategoriesGridViewState();
+    return ChangeNotifierProvider<ListProvider>(
+      create:(context)=>ListProvider(),
+      child:SubCategoriesListWidget(id:id),
+    );
+  }
 }
 
-class _CategoriesGridViewState extends State<CategoriesListView> {
+
+
+class SubCategoriesListWidget extends StatefulWidget {
+  int? id ;
+   SubCategoriesListWidget({Key? key,this.id}) : super(key: key);
+
+  @override
+  State<SubCategoriesListWidget> createState() => _SubCategoriesListWidgetState();
+}
+class _SubCategoriesListWidgetState extends State<SubCategoriesListWidget> {
+
   bool currentBool = true;
+  @override
+  initState(){
+    final _provider = Provider.of<ListProvider>(context, listen: false);
+    _provider.fetchCategory(widget.id);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final _provider = Provider.of<ListProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -47,7 +73,7 @@ class _CategoriesGridViewState extends State<CategoriesListView> {
         // backgroundColor: Colors.transparent,
         // child: MyDrawerList(),
       ),
-      body: Column(
+      body: _provider.isServiceCalling?Column(
         children: [
           SizedBox(height: size.height * 0.02,),
           Padding(
@@ -55,7 +81,7 @@ class _CategoriesGridViewState extends State<CategoriesListView> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   "Change Layout",
                   style: boldblackText,
                 ),
@@ -105,10 +131,10 @@ class _CategoriesGridViewState extends State<CategoriesListView> {
           currentBool ?
           Expanded(child: CategoriesGridView())
               : Expanded(child: ListView.builder(
-            itemCount: categories.length,
+            itemCount: _provider.categoryList.length,
             padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
             itemBuilder: (context, index){
-              Categories categoriesListItem = categories[index];
+              CategoryItem _item = _provider.categoryList[index];
               return GestureDetector(
                 onTap: (){},
                 child: Container(
@@ -122,7 +148,7 @@ class _CategoriesGridViewState extends State<CategoriesListView> {
                           Container(
                             width: size.width * 0.34,
                             height: size.height * 0.20,
-                            child: Image.asset("assets/icons/image.png",fit: BoxFit.cover,),
+                            child: Image.network(_item.image!,fit: BoxFit.cover,),
                           ),
                           SizedBox(width: size.width * 0.02,),
                           Expanded(
@@ -131,11 +157,11 @@ class _CategoriesGridViewState extends State<CategoriesListView> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(categoriesListItem.title,style: categoriesTitle.copyWith(fontSize: 19)),
+                                  Text("${_item.title}",style: categoriesTitle.copyWith(fontSize: 19)),
                                   SizedBox(height: size.height * 0.01,),
-                                  Text(categoriesListItem.subTitle,style: categoriesListSubTitle,),
+                                  Text(_item.title!,style: categoriesListSubTitle,),
                                   SizedBox(height: size.height * 0.01,),
-                                  Text("${categoriesListItem.total} DH",style: detailZeroText.copyWith(fontSize: 17,fontWeight: FontWeight.bold)),
+                                  Text("${_item.price} DH",style: detailZeroText.copyWith(fontSize: 17,fontWeight: FontWeight.bold)),
                                 ],
                               ),
                             ),
@@ -149,7 +175,8 @@ class _CategoriesGridViewState extends State<CategoriesListView> {
             },),
           )
         ],
-      ),
+      )
+          :Center(child: Text("Not data"))
     );
   }
 }

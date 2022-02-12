@@ -23,8 +23,4 @@ class MenuItemProvider extends ChangeNotifier {
     // }
     }
 
-  void fetchCategory(int? id) async {
-    var data = await CategoriesRepo.getCategory(id);
-  }
-
 }

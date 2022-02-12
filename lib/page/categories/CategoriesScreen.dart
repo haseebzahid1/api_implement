@@ -1,4 +1,3 @@
-import 'package:api_implement/model/categories_apo.dart';
 import 'package:api_implement/page/categories/categories_listView.dart';
 import 'package:api_implement/page/categories/provider.dart';
 import 'package:api_implement/style/constant.dart';
@@ -31,6 +30,7 @@ class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
     final menuProvider = Provider.of<MenuItemProvider>(context, listen: false);
     menuProvider.fetchMenuType();
     super.initState();
+
   }
   Widget build(BuildContext context) {
     final menuProvider = Provider.of<MenuItemProvider>(context);
@@ -84,8 +84,12 @@ class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
                 return GestureDetector(
                   onTap: (){
                     print(categoriesItem.id);
-                    menuProvider.fetchCategory(categoriesItem.id);
-                    // Navigator.of(context).push(MaterialPageRoute(builder: (context)=> CategoriesListView()));
+                    // menuProvider.fetchCategory(categoriesItem.id);
+
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> SubCategoriesScreen(
+                        id:categoriesItem.id,
+                      )));
+
                   },
                   child: Container(
                     decoration: BoxDecoration(
