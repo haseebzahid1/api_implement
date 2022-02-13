@@ -1,11 +1,10 @@
 import 'package:api_implement/model/CategorieItem.dart';
-import 'package:api_implement/page/categories/categories_gridview.dart';
-import 'package:api_implement/page/categories/listProvider.dart';
+import 'package:api_implement/page/subCategory/categories_gridview.dart';
+import 'package:api_implement/page/subCategory/provider/subCategoryProvider.dart';
 import 'package:api_implement/style/constant.dart';
 import 'package:api_implement/style/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'categories_selectedDetailView.dart';
 class SubCategoriesScreen extends StatelessWidget {
   int? id;
@@ -55,7 +54,7 @@ class _SubCategoriesListWidgetState extends State<SubCategoriesListWidget> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("33",style: categoriesCoinText),
+                Text(_provider.categoryList.length.toString(),style: categoriesCoinText),
                 SizedBox(width: size.width * 0.01,),
                 Container(
                   width: size.width * 0.06,
@@ -180,7 +179,7 @@ class _SubCategoriesListWidgetState extends State<SubCategoriesListWidget> {
           )
         ],
       )
-          :Center(child: Text("Not data"))
+          :const Center(child: CircularProgressIndicator())
     );
   }
 

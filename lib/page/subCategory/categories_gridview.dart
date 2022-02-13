@@ -1,7 +1,6 @@
 import 'package:api_implement/model/CategorieItem.dart';
 import 'package:api_implement/style/constant.dart';
 import 'package:flutter/material.dart';
-
 import 'categories_selectedDetailView.dart';
 
 class CategoriesGridView extends StatelessWidget {

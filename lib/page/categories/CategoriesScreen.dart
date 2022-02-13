@@ -1,5 +1,5 @@
-import 'package:api_implement/page/categories/categories_listView.dart';
-import 'package:api_implement/page/categories/provider.dart';
+import 'package:api_implement/page/subCategory/categories_listView.dart';
+import 'package:api_implement/page/categories/provider/categoryProvider.dart';
 import 'package:api_implement/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +47,7 @@ class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("33",style: categoriesCoinText),
+                Text(menuProvider.menuList.length.toString(),style: categoriesCoinText),
                 SizedBox(width: size.width * 0.01,),
                 Container(
                   width: size.width * 0.06,
