@@ -1,9 +1,12 @@
-import 'package:api_implement/model/categories_apo.dart';
+import 'package:api_implement/model/CategorieItem.dart';
 import 'package:api_implement/style/constant.dart';
 import 'package:flutter/material.dart';
 
+import 'categories_selectedDetailView.dart';
+
 class CategoriesGridView extends StatelessWidget {
-  const CategoriesGridView({Key? key}) : super(key: key);
+  List<CategoryItem> data;
+   CategoriesGridView({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,7 @@ class CategoriesGridView extends StatelessWidget {
             child: GridView.builder(
               scrollDirection: Axis.vertical,
               padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
-              itemCount: categories.length,
+              itemCount: data.length,
               gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
                 mainAxisSpacing:20,
                 crossAxisCount: 2,
@@ -23,9 +26,13 @@ class CategoriesGridView extends StatelessWidget {
                 childAspectRatio: 0.90,
               ),
               itemBuilder: (context, index){
-                Categories categoriesItem= categories[index];
+                CategoryItem  dataProduct  = data[index];
                 return GestureDetector(
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CategoriesDetailView(
+                        data:dataProduct
+                    )));
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -51,7 +58,7 @@ class CategoriesGridView extends StatelessWidget {
                             ),
 
                             width: size.width,
-                            child: Image.asset(categoriesItem.img,fit: BoxFit.cover,),
+                            child: Image.network("${dataProduct.image}",fit: BoxFit.cover,),
                           ),
                         ),
                         Padding(
@@ -59,9 +66,9 @@ class CategoriesGridView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Wagyu Steak Roll",style: categoriesTitle,),
+                              Text(dataProduct.title!,style: categoriesTitle,),
                               SizedBox(height: 2,),
-                              Text("249.00 DH",style: detailZeroText.copyWith(fontSize: 11,fontWeight: FontWeight.bold)),
+                              Text(dataProduct.price!,style: detailZeroText.copyWith(fontSize: 11,fontWeight: FontWeight.bold)),
                             ],
                           ),
                         ),

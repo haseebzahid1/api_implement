@@ -1,11 +1,12 @@
 import 'package:api_implement/model/CategorieItem.dart';
-import 'package:api_implement/model/categories_apo.dart';
 import 'package:api_implement/page/categories/categories_gridview.dart';
 import 'package:api_implement/page/categories/listProvider.dart';
 import 'package:api_implement/style/constant.dart';
 import 'package:api_implement/style/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'categories_selectedDetailView.dart';
 class SubCategoriesScreen extends StatelessWidget {
   int? id;
    SubCategoriesScreen({Key? key,this.id}) : super(key: key);
@@ -69,10 +70,7 @@ class _SubCategoriesListWidgetState extends State<SubCategoriesListWidget> {
           const SizedBox(width: 10,)
         ],
       ),
-      drawer:const Drawer(
-        // backgroundColor: Colors.transparent,
-        // child: MyDrawerList(),
-      ),
+      drawer:const Drawer(),
       body: _provider.isServiceCalling?Column(
         children: [
           SizedBox(height: size.height * 0.02,),
@@ -81,7 +79,7 @@ class _SubCategoriesListWidgetState extends State<SubCategoriesListWidget> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   "Change Layout",
                   style: boldblackText,
                 ),
@@ -129,14 +127,20 @@ class _SubCategoriesListWidgetState extends State<SubCategoriesListWidget> {
             ),
           ),
           currentBool ?
-          Expanded(child: CategoriesGridView())
+          Expanded(child: CategoriesGridView(
+            data : _provider.categoryList
+          ))
               : Expanded(child: ListView.builder(
             itemCount: _provider.categoryList.length,
             padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
             itemBuilder: (context, index){
               CategoryItem _item = _provider.categoryList[index];
               return GestureDetector(
-                onTap: (){},
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CategoriesDetailView(
+                    data:_item
+                  )));
+                },
                 child: Container(
                   width: size.width,
                   margin: EdgeInsets.only(top: 10),
@@ -179,4 +183,5 @@ class _SubCategoriesListWidgetState extends State<SubCategoriesListWidget> {
           :Center(child: Text("Not data"))
     );
   }
+
 }

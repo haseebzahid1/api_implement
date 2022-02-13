@@ -5,3 +5,4 @@ const categoriesTitle = TextStyle(fontSize: 17,color: Colors.black,fontFamily: "
 const detailZeroText =  TextStyle(fontSize: 10,fontFamily: "Avenir",fontWeight: FontWeight.bold,color: Color.fromRGBO(0, 84, 165, 10));
 const boldblackText = TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.bold, fontFamily: 'Avenir',);
 const categoriesListSubTitle = TextStyle(color: Colors.grey,fontSize: 14.5,fontWeight: FontWeight.bold,fontFamily:"Avenir" );
+const categoriesDetailViewTitle = TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.grey);
