@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class MenuItemProvider extends ChangeNotifier {
   List<CategoryMenuType>  menuList = [];
   bool isServiceCalling= false;
-
+    int? itemsLength;
 
   void fetchMenuType() async {
     isServiceCalling = false;
@@ -13,6 +13,7 @@ class MenuItemProvider extends ChangeNotifier {
     if(menuType != null && menuType.isNotEmpty) {
       menuList = menuType;
       isServiceCalling = true;
+      itemsLength = menuType.length;
       notifyListeners();
     }
 

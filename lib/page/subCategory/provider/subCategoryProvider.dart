@@ -6,7 +6,7 @@ class ListProvider extends ChangeNotifier{
 
   List<CategoryItem>  categoryList = [];
   bool isServiceCalling= false;
-
+  int? lengthCount;
   void fetchCategory(int? id) async {
     isServiceCalling =false;
     if(id != null){
@@ -14,6 +14,7 @@ class ListProvider extends ChangeNotifier{
       if(data != null && data.isNotEmpty){
         categoryList = data;
         isServiceCalling = true;
+        lengthCount = categoryList.length;
         notifyListeners();
       }
       // print("Response is $data  null");

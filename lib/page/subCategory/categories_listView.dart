@@ -54,7 +54,7 @@ class _SubCategoriesListWidgetState extends State<SubCategoriesListWidget> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(_provider.categoryList.length.toString(),style: categoriesCoinText),
+                Text("${_provider.lengthCount??""}",style: categoriesCoinText),
                 SizedBox(width: size.width * 0.01,),
                 Container(
                   width: size.width * 0.06,

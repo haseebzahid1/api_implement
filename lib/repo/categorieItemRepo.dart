@@ -41,7 +41,7 @@ class CategoriesRepo {
     var url = Uri.https(baseUrl, '/api/v1/menu',
         {"menu_type_id": "1", "branch_id": "1", "category_id": "$id"});
     var response = await client.get(url);
-    print(url);
+    print(id);
     List<CategoryItem> categoryList = [];
    try{
      if (response.statusCode == 200) {

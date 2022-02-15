@@ -32,6 +32,7 @@ class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
     super.initState();
 
   }
+
   Widget build(BuildContext context) {
     final menuProvider = Provider.of<MenuItemProvider>(context);
     final Size size = MediaQuery.of(context).size;
@@ -47,7 +48,7 @@ class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(menuProvider.menuList.length.toString(),style: categoriesCoinText),
+                Text("${menuProvider.itemsLength??""}",style: categoriesCoinText),
                 SizedBox(width: size.width * 0.01,),
                 Container(
                   width: size.width * 0.06,
@@ -71,7 +72,6 @@ class _CategoriesScreenWidgetState extends State<CategoriesScreenWidget> {
               scrollDirection: Axis.vertical,
               padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
               itemCount: menuProvider.menuList.length,
-              // itemCount: categories.length,
               gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
                 mainAxisSpacing:20,
                 crossAxisCount: 2,

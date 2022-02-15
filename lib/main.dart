@@ -1,5 +1,5 @@
-import 'package:api_implement/page/categories/CategoriesScreen.dart';
 import 'package:flutter/material.dart';
+import 'map.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         highlightColor: Colors.transparent,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: CategoriesScreen(),
+      home: MapPage(),
     );
   }
 }
