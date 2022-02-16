@@ -3,19 +3,28 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class MapPage extends StatefulWidget {
+class MapPage extends StatelessWidget {
   const MapPage({Key? key}) : super(key: key);
 
   @override
-  State<MapPage> createState() => _MapPageState();
+  Widget build(BuildContext context) {
+    return Container();
+  }
 }
 
-class _MapPageState extends State<MapPage> {
+
+class MapPageWidget extends StatefulWidget {
+  const MapPageWidget({Key? key}) : super(key: key);
+
+  @override
+  State<MapPageWidget> createState() => _MapPageState();
+}
+
+class _MapPageState extends State<MapPageWidget> {
 
   Completer<GoogleMapController> _controller = Completer();
 
   static const CameraPosition _kGooglePlex = CameraPosition(target: LatLng(31.411930 , 73.108047), zoom: 14.151926040649414,);
-
   static const CameraPosition _kLake =   CameraPosition(
     bearing: 192.8334901395799,
     target: LatLng(31.411930 , 73.108047),
@@ -34,10 +43,10 @@ class _MapPageState extends State<MapPage> {
     marker.addAll(_list);
   }
 
-   List<Marker> marker = [];
+  List<Marker> marker = [];
 
-   final List<Marker> _list  = [
-     const Marker(
+  final List<Marker> _list  = [
+    const Marker(
       markerId:  MarkerId('id-1'),
       position:  LatLng(31.411930 , 73.108047),
       infoWindow:  InfoWindow(
@@ -45,22 +54,22 @@ class _MapPageState extends State<MapPage> {
           snippet: 'A title place'
       ),
     ),
-      const Marker(
+    const Marker(
       markerId:  MarkerId('id-2'),
       position:  LatLng(31.411930 , 73.115047),
       infoWindow:  InfoWindow(
-          title: "title-2",
-          snippet: 'A title place_2',
+        title: "title-2",
+        snippet: 'A title place_2',
       ),
     ),
-      const Marker(
-       markerId: MarkerId('id-1'),
-       position: LatLng(31.411930 , 73.098047),
-       infoWindow: InfoWindow(
-           title: "title",
-           snippet: 'A title place'
-       ),
-     ),
+    const Marker(
+      markerId: MarkerId('id-1'),
+      position: LatLng(31.411930 , 73.098047),
+      infoWindow: InfoWindow(
+          title: "title",
+          snippet: 'A title place'
+      ),
+    ),
   ];
 
 
@@ -80,12 +89,12 @@ class _MapPageState extends State<MapPage> {
         title: Text("map"),
       ),
       body:GoogleMap(
-        mapType: MapType.terrain,
-        initialCameraPosition:_kGooglePlex,
-        markers: Set.of(marker),
-        onMapCreated: (GoogleMapController controller){
-          _controller.complete(controller);
-        }
+          mapType: MapType.terrain,
+          initialCameraPosition:_kGooglePlex,
+          markers: Set.of(marker),
+          onMapCreated: (GoogleMapController controller){
+            _controller.complete(controller);
+          }
       ),
     );
   }
