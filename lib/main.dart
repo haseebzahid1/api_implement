@@ -1,5 +1,6 @@
 import 'package:api_implement/page/FlexubkeScreen.dart';
 import 'package:api_implement/page/categories/CategoriesScreen.dart';
+import 'package:api_implement/page/map/map.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         highlightColor: Colors.transparent,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: FlexibleScreen(),
+      home: MapPage(),
     );
   }
 }

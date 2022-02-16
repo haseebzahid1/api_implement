@@ -27,9 +27,10 @@ class FlexibleScreenWidget extends StatefulWidget {
 }
 
 class _FlexibleScreenWidgetState extends State<FlexibleScreenWidget> {
+  @override
   initState(){
     final _provider = Provider.of<MapProvider>(context, listen: false);
-    _provider.getMap();
+    _provider.getMapData();
     super.initState();
   }
 
